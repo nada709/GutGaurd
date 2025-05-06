@@ -1,0 +1,341 @@
+/* --- profile css --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9fafb;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #5A3DFF;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #4930cc;
+}
+
+/* Improved Navigation (Standardized) */
+.navbar {
+    background-color: #ffffff; /* White background matching the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow matching the image */
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 1rem 2rem;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5A3DFF; /* Changed brand color to purple-blueish */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.brand:hover {
+    color: #4930cc; /* Slightly darker purple-blueish on hover */
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #666666; /* Link color is dark grey as in the image */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    padding: 0.5rem 0;
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: #5A3DFF; /* Hover color is purple-blueish */
+}
+
+.nav-link.active {
+    color: #5A3DFF; /* Active link color is purple-blueish */
+    font-weight: 600; /* Active link is bold */
+    /* The underline is handled by the ::after pseudo-element below */
+}
+
+/* Add underline effect for hover and active states */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Underline thickness */
+    bottom: 0;
+    left: 0;
+    background-color: #5A3DFF; /* Underline color is purple-blueish */
+    transition: width 0.2s ease-in-out; /* Smooth transition */
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%; /* Full width underline on hover/active */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 60px; /* Position below the navbar */
+        left: 0;
+        right: 0;
+        background-color: white; /* White background for mobile menu */
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%); /* Hide by default */
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        gap: 0; /* Space between links in mobile menu */
+        width: 100%;
+    }
+
+    .nav-links.active {
+        transform: translateY(0); /* Show when active */
+        opacity: 1;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        width: 100%;
+        text-align: center;
+        color: #333333; /* Ensure mobile links have a readable color */
+    }
+
+     .nav-link.active {
+        color: #5A3DFF; /* Active link color in mobile */
+    }
+
+    .nav-link::after {
+        display: none; /* Hide underline in mobile menu */
+    }
+
+    /* Mobile menu toggle button */
+    .menu-toggle {
+        display: block; /* Show toggle button on mobile */
+        position: absolute; /* Position relative to the navbar */
+        right: 1rem;
+        top: 1rem;
+    }
+}
+
+/* For desktop - hide toggle */
+.menu-toggle {
+    display: none;
+}
+
+
+/* Hero section */
+.hero {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #555;
+}
+
+/* Features section */
+.features {
+    padding: 4rem 1rem;
+    background-color: white;
+}
+
+.features-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background-color: #f8f9fe;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(90, 61, 255, 0.1);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: #5A3DFF;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.feature-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* How it works section */
+.how-it-works {
+    padding: 4rem 1rem;
+    background-color: #f9fafb;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background-color: #5A3DFF;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.step-content p {
+    color: #666;
+}
+
+/* CTA section */
+.cta {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #5A3DFF 0%, #6E5BF2 100%);
+    color: white;
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta .btn {
+    background-color: white;
+    color: #5A3DFF;
+}
+
+.cta .btn:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: white;
+    text-decoration: underline;
+}

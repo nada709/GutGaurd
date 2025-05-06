@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gut Health Weekly Meal Planner</title>
+<link rel="stylesheet" href="Meal.css">
+</head>
+<body>
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo or Brand Name -->
+            <a href="Home.html" class="brand">GutGuard</a>
+            
+            <!-- Mobile menu toggle (hidden on desktop) -->
+            <button class="menu-toggle">☰</button>
+            
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a href="../Home/Home.html" class="nav-link ">Home</a>
+                <a href="../Meal/Meal.html" class="nav-link active">Meal Plan</a> 
+                <a href="../Chatbot/Chatbot.html" class="nav-link">Chatbot</a> 
+                <a href="../Report/Report.html" class="nav-link">Report</a> 
+                <a href="../Profile/Profile.html" class="nav-link">Profile</a> 
+            </div>
+        </div>
+    </nav>
+  <div class="header">Gut Health Weekly Meal Planner</div>
+  <div class="container">
+      <div class="tabs">
+          <div class="tab active" onclick="switchTab('profile')">Health Profile</div>
+          <div class="tab" onclick="switchTab('planner')">Meal Planner</div>
+      </div>
+      
+      <div id="profile-tab" class="tab-content active">
+          <h2>Your Health Profile</h2>
+          <div class="form-group">
+              <label>Select Your Digestive Condition</label>
+              <select id="condition">
+                  <option value="">Select a condition (optional)</option>
+                  <option value="IBS">Irritable Bowel Syndrome (IBS)</option>
+              </select>
+              <p class="info-text">Selecting a condition will tailor meals to your specific needs</p>
+          </div>
+          <div class="form-group">
+              <label>Food Allergies/Intolerances (comma separated)</label>
+              <input type="text" id="allergies" placeholder="e.g., dairy, gluten, eggs, nuts">
+          </div>
+          <div class="form-group">
+              <label>Food Dislikes (comma separated)</label>
+              <input type="text" id="dislikes" placeholder="e.g., broccoli, fish, mushrooms">
+          </div>
+          <div class="form-group">
+              <label>Food Likes (comma separated)</label>
+              <input type="text" id="likes" placeholder="e.g., chicken, pasta, rice, sweet potatoes">
+              <p class="info-text">We'll prioritize meals containing these ingredients</p>
+          </div>
+          <button class="btn" onclick="generateMealOptions()">Generate Meal Options</button>
+      </div>
+      
+      <div id="planner-tab" class="tab-content">
+          <div class="week-navigation">
+              <button onclick="changeWeek(-1)">Previous Week</button>
+              <div class="current-week" id="current-week">Week of June 5, 2023</div>
+              <button onclick="changeWeek(1)">Next Week</button>
+          </div>
+          
+          <table class="calendar">
+              <thead>
+                  <tr>
+                      <th>Sunday</th>
+                      <th>Monday</th>
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                      <th>Saturday</th>
+                  </tr>
+              </thead>
+              <tbody id="calendar-body">
+                  <!-- Calendar will be generated here -->
+              </tbody>
+          </table>
+          
+          <div id="meal-options-container" style="margin-top: 30px;">
+              <!-- Meal options will appear here -->
+          </div>
+      </div>
+      
+      <div id="results-container">
+          <!-- Results will be displayed here -->
+      </div>
+  </div>
+  
+  <script src="Meal.js"></script>
+      
+</body>
+</html>

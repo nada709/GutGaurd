@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GutGuard Chatbot - Smart Medical Assistant</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<style>
+body {
+  background-color: #f8f9fa;
+}
+.chat-container {
+  max-height: 550px;
+  overflow-y: auto;
+}
+.assistant-message {
+  border-left: 4px solid #5b45ee;
+}
+.error-message {
+  border-left: 4px solid #f59e0b;
+}
+.user-message {
+  background-color: #5b45ee;
+  color: white;
+}
+
+/* Improved Navigation */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 1rem 2rem;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.brand:hover {
+    color: #5A3DFF;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    padding: 0.5rem 0;
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: #5A3DFF;
+}
+
+.nav-link.active {
+    color: #5A3DFF;
+    font-weight: 600;
+}
+
+/* Add underline effect to match original hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #5A3DFF;
+    transition: width 0.2s ease-in-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        gap: 0;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    /* Mobile menu toggle button */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #5A3DFF;
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}
+
+/* For desktop - hide toggle */
+.menu-toggle {
+    display: none;
+}
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo or Brand Name -->
+    <a href="Home.html" class="brand">GutGuard</a>
+    
+    <!-- Mobile menu toggle (hidden on desktop) -->
+    <button class="menu-toggle">☰</button>
+    
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a href="../Home/Home.html" class="nav-link">Home</a>
+      <a href="../Meal/Meal.html" class="nav-link">Meal Plan</a>
+      <a href="../Chatbot/Chatbot.html" class="nav-link active">Chatbot</a>
+      <a href="../Report/Report.html" class="nav-link">Report</a>
+      <a href="../Profile/Profile.html" class="nav-link">Profile</a>
+    </div>
+  </div>
+</nav>
+
+<div id="root"></div>
+
+<script type="text/babel" src="Chatbot.js"></script>
+
+<script>
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (toggleButton && navLinks) {
+        toggleButton.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    }
+});
+</script>
+
+</body>
+</html>

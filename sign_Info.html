@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBS Medical Chatbot - Authentication</title>
+    <style>
+        :root {
+            --color-primary: #4f46e5;
+            --color-secondary: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --color-text: #1f2937;
+            --color-bg: #f9fafb;
+            --color-card: #ffffff;
+            --color-border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--color-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .auth-body {
+            padding: 24px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+        }
+
+        .btn-secondary {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding: 16px;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--color-danger);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--color-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .divider::before {
+            margin-right: 16px;
+        }
+
+        .divider::after {
+            margin-left: 16px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background-color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .social-btn:hover {
+            background-color: #e5e7eb;
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                border-radius: 0;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>IBS Medical Chatbot</h1>
+            <p>Your personal health analysis assistant</p>
+        </div>
+        
+        <div class="auth-body">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('login')">Sign In</div>
+                <div class="tab" onclick="switchTab('register')">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-tab" class="tab-content active">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                        <div id="login-email-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" required>
+                        <span class="password-toggle-icon" onclick="togglePassword('login-password')">👁️</span>
+                        <div id="login-password-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Sign In</button>
+                    </div>
+                    
+                    <div id="login-error" class="error-message"></div>
+                    
+                    <div class="divider">or</div>
+                    
+                    <div class="social-login">
+                        <div class="social-btn" onclick="socialLogin('google')">
+                            <svg class="social-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                        </div>
+                        <div class="social-btn" onclick="socialLogin('microsoft')">
+                            <svg class="social-icon" viewBox="0 0 23 23" width="20" height="20">
+                                <path fill="#f25022" d="M1 1h10v10H1z"/>
+                                <path fill="#00a4ef" d="M12 1h10v10H12z"/>
+                                <path fill="#7fba00" d="M1 12h10v10H1z"/>
+                                <path fill="#ffb900" d="M12 12h10v10H12z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        <a href="#" onclick="switchTab('forgot')">Forgot password?</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Registration Form -->
+            <div id="register-tab" class="tab-content">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" class="form-control" required>
+                        <div id="reg-email-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" class="form-control" required>
+                        <div id="reg-username-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" class="form-control" required>
+                        <span class="password-toggle-icon" onclick="togglePassword('reg-password')">👁️</span>
+                        <div id="reg-password-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" class="form-control" required>
+                        <span class="password-toggle-icon" onclick="togglePassword('reg-confirm-password')">👁️</span>
+                        <div id="reg-confirm-password-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Create Account</button>
+                    </div>
+                    
+                    <div id="register-error" class="error-message"></div>
+                    <div id="register-success" class="success-message"></div>
+                    
+                    <div class="auth-footer">
+                        Already have an account? <a href="#" onclick="switchTab('login')">Sign In</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Forgot Password Form -->
+            <div id="forgot-tab" class="tab-content">
+                <form id="forgot-form">
+                    <div class="form-group">
+                        <label for="forgot-email">Email Address</label>
+                        <input type="email" id="forgot-email" class="form-control" required>
+                        <div id="forgot-email-error" class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Send Reset Link</button>
+                    </div>
+                    
+                    <div id="forgot-error" class="error-message"></div>
+                    <div id="forgot-success" class="success-message"></div>
+                    
+                    <div class="auth-footer">
+                        <a href="#" onclick="switchTab('login')">Back to Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Activate selected tab
+            if (tabName === 'login') {
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('login-tab').classList.add('active');
+            } else if (tabName === 'register') {
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('register-tab').classList.add('active');
+            } else if (tabName === 'forgot') {
+                document.getElementById('forgot-tab').classList.add('active');
+            }
+            
+            // Clear all error messages
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+        }
+        
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+        
+        // Form validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function validatePassword(password) {
+            return password.length >= 8;
+        }
+        
+        // Form submissions
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Reset errors
+            document.getElementById('login-email-error').style.display = 'none';
+            document.getElementById('login-password-error').style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            
+            // Validate
+            let isValid = true;
+            
+            if (!validateEmail(email)) {
+                document.getElementById('login-email-error').textContent = 'Please enter a valid email address';
+                document.getElementById('login-email-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!validatePassword(password)) {
+                document.getElementById('login-password-error').textContent = 'Password must be at least 8 characters';
+                document.getElementById('login-password-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Simulate API call
+            simulateLogin(email, password);
+        });
+        
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('reg-email').value;
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+            
+            // Reset errors
+            document.getElementById('reg-email-error').style.display = 'none';
+            document.getElementById('reg-username-error').style.display = 'none';
+            document.getElementById('reg-password-error').style.display = 'none';
+            document.getElementById('reg-confirm-password-error').style.display = 'none';
+            document.getElementById('register-error').style.display = 'none';
+            document.getElementById('register-success').style.display = 'none';
+            
+            // Validate
+            let isValid = true;
+            
+            if (!validateEmail(email)) {
+                document.getElementById('reg-email-error').textContent = 'Please enter a valid email address';
+                document.getElementById('reg-email-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (username.length < 3) {
+                document.getElementById('reg-username-error').textContent = 'Username must be at least 3 characters';
+                document.getElementById('reg-username-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!validatePassword(password)) {
+                document.getElementById('reg-password-error').textContent = 'Password must be at least 8 characters';
+                document.getElementById('reg-password-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('reg-confirm-password-error').textContent = 'Passwords do not match';
+                document.getElementById('reg-confirm-password-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Simulate API call
+            simulateRegistration(email, username, password);
+        });
+        
+        document.getElementById('forgot-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('forgot-email').value;
+            
+            // Reset messages
+            document.getElementById('forgot-email-error').style.display = 'none';
+            document.getElementById('forgot-error').style.display = 'none';
+            document.getElementById('forgot-success').style.display = 'none';
+            
+            // Validate
+            if (!validateEmail(email)) {
+                document.getElementById('forgot-email-error').textContent = 'Please enter a valid email address';
+                document.getElementById('forgot-email-error').style.display = 'block';
+                return;
+            }
+            
+            // Simulate API call
+            simulatePasswordReset(email);
+        });
+        
+        // Social login
+        function socialLogin(provider) {
+            console.log(`Attempting ${provider} login`);
+            // In a real app, this would redirect to the provider's OAuth endpoint
+            alert(`In a real app, this would redirect to ${provider} login`);
+        }
+        
+        // Simulated API calls
+        function simulateLogin(email, password) {
+            // Show loading state
+            const btn = document.querySelector('#login-form button');
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+            localStorage.setItem('gutguard_profile', JSON.stringify(userData));
+            // Simulate API delay
+            setTimeout(() => {
+                // This is just for demonstration - in a real app, you would check the response from your server
+                if (email && password) {
+                    // Successful login - redirect to chat
+                    localStorage.setItem('isAuthenticated', 'true');
+                   window.location.href =  '../Profile/Profile.html';
+                } else {
+                    document.getElementById('login-error').textContent = 'Invalid email or password';
+                    document.getElementById('login-error').style.display = 'block';
+                }
+                
+                // Reset button
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+            }, 1000);
+        }
+        
+        function simulateRegistration(email, username, password) {
+            // Show loading state
+            const btn = document.querySelector('#register-form button');
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+            
+            // Simulate API delay
+            setTimeout(() => {
+                // This is just for demonstration
+                document.getElementById('register-success').textContent = 'Account created successfully! Redirecting...';
+                document.getElementById('register-success').style.display = 'block';
+                
+                // In a real app, you would handle the registration response
+                localStorage.setItem('isAuthenticated', 'true');
+                
+                // Redirect after a delay
+                setTimeout(() => {
+                    window.location.href = '../Profile/Profile.html';
+                }, 1500);
+                
+                // Reset button
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+            }, 1000);
+        }
+        
+        function simulatePasswordReset(email) {
+            // Show loading state
+            const btn = document.querySelector('#forgot-form button');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            
+            // Simulate API delay
+            setTimeout(() => {
+                // This is just for demonstration
+                document.getElementById('forgot-success').textContent = 'If an account exists with this email, a reset link has been sent.';
+                document.getElementById('forgot-success').style.display = 'block';
+                
+                // Reset button
+                btn.disabled = false;
+                btn.textContent = 'Send Reset Link';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

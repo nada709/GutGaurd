@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GutGuard Report - Medical Report Analyzer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <link rel="stylesheet" href="Report.css">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo or Brand Name -->
+            <a href="../Home/Home.html" class="brand">GutGuard</a>
+            
+            <!-- Mobile menu toggle (hidden on desktop) -->
+            <button class="menu-toggle">☰</button>
+            
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a href="../Home/Home.html" class="nav-link ">Home</a>
+                <a href="../Meal/Meal.html" class="nav-link">Meal Plan</a>
+                <a href="../Chatbot/Chatbot.html" class="nav-link">Chatbot</a>
+                <a href="../Report/Report.html" class="nav-link active">Report</a>
+                <a href="../Profile/Profile.html" class="nav-link">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        <div class="dashboard">
+            <!-- Health Score Panel -->
+            <div class="card health-score">
+                <div class="card-header">
+                    <h2>Gut Health Score</h2>
+                    <div class="tooltip">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6b8cae" stroke-width="2"/>
+                            <path d="M12 17V12" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 8V7" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tooltip-text">Score calculated based on lab markers, inflammation indicators, and reported symptoms</span>
+                    </div>
+                </div>
+                
+                <div class="score-display">
+                    <div class="score-circle" style="--score: 0">
+                        <div class="score-inner">
+                            <span class="score-value">0</span>
+                            <span class="score-label">Start Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="score-indicators">
+                    <div class="indicator">
+                        <div class="indicator-value">0</div>
+                        <div class="indicator-label">Digestion</div>
+                        <div class="indicator-trend neutral">0%</div>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-value">0</div>
+                        <div class="indicator-label">Inflammation</div>
+                        <div class="indicator-trend neutral">0%</div>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-value">0</div>
+                        <div class="indicator-label">Absorption</div>
+                        <div class="indicator-trend neutral">0%</div>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-value">0</div>
+                        <div class="indicator-label">Microbiome</div>
+                        <div class="indicator-trend neutral">0%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trends Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Markers Over Time</h2>
+                    <div class="tooltip">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6b8cae" stroke-width="2"/>
+                            <path d="M12 17V12" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 8V7" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tooltip-text">Tracking key markers from your blood tests over time</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="markersChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Symptom Distribution -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Symptom Distribution</h2>
+                    <div class="tooltip">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6b8cae" stroke-width="2"/>
+                            <path d="M12 17V12" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 8V7" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tooltip-text">Distribution of your reported symptoms by category</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="symptomsChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Key Metrics -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Lab Results Overview</h2>
+                    <button id="add-lab-button" class="btn">+ Add Results</button>
+                </div>
+                <div class="lab-overview">
+                    <div class="lab-tests">
+                        <div class="lab-test">
+                            <div class="lab-test-name">Hemoglobin</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">12.0-16.0 g/dL</div>
+                        </div>
+                        <div class="lab-test">
+                            <div class="lab-test-name">CRP</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">0.0-1.0 mg/L</div>
+                        </div>
+                        <div class="lab-test">
+                            <div class="lab-test-name">Ferritin</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">20-250 ng/mL</div>
+                        </div>
+                        <div class="lab-test">
+                            <div class="lab-test-name">Vit D</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">30-100 ng/mL</div>
+                        </div>
+                        <div class="lab-test">
+                            <div class="lab-test-name">Calprotectin</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">0-50 μg/g</div>
+                        </div>
+                        <div class="lab-test">
+                            <div class="lab-test-name">B12</div>
+                            <div class="lab-test-value">-</div>
+                            <div class="lab-test-range">200-900 pg/mL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommendations -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Recommendations</h2>
+                </div>
+                <div class="recommendations">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li>Begin tracking your symptoms daily</li>
+                        <li>Add your lab results when available</li>
+                        <li>Check back for personalized recommendations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Symptom Tracker -->
+            <div class="card symptom-tracker">
+                <div class="card-header">
+                    <h2>Symptom Tracker</h2>
+                    <div class="tooltip">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6b8cae" stroke-width="2"/>
+                            <path d="M12 17V12" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 8V7" stroke="#6b8cae" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tooltip-text">Track your symptoms daily for better insights</span>
+                    </div>
+                </div>
+                
+                <div class="symptoms-list">
+                    <div class="symptom-item">
+                        <input type="checkbox" id="bloating" class="symptom-checkbox">
+                        <label for="bloating" class="symptom-label">Bloating</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="abdominal-pain" class="symptom-checkbox">
+                        <label for="abdominal-pain" class="symptom-label">Abdominal Pain</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="diarrhea" class="symptom-checkbox">
+                        <label for="diarrhea" class="symptom-label">Diarrhea</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="constipation" class="symptom-checkbox">
+                        <label for="constipation" class="symptom-label">Constipation</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="heartburn" class="symptom-checkbox">
+                        <label for="heartburn" class="symptom-label">Heartburn</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="nausea" class="symptom-checkbox">
+                        <label for="nausea" class="symptom-label">Nausea</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="fatigue" class="symptom-checkbox">
+                        <label for="fatigue" class="symptom-label">Fatigue</label>
+                    </div>
+                    <div class="symptom-item">
+                        <input type="checkbox" id="gas" class="symptom-checkbox">
+                        <label for="gas" class="symptom-label">Excessive Gas</label>
+                    </div>
+                </div>
+                
+                <div class="symptom-severity">
+                    <div class="severity-label">Overall Severity:</div>
+                    <input type="range" min="0" max="10" value="0" class="severity-slider" id="severity-slider">
+                    <div class="severity-value" id="severity-value">0</div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="symptomHistoryChart"></canvas>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn" id="track-button" onclick="saveSymptoms()">Save Today's Symptoms</button>
+                    <button class="btn" id="export-data">Export Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Report.js"></script>
+</body>
+</html>

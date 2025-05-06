@@ -1,0 +1,73 @@
+[
+  {
+    "disease_name": "Irritable Bowel Syndrome (IBS)",
+    "description": "Irritable Bowel Syndrome (IBS) is a common, chronic functional gastrointestinal disorder affecting the large intestine. It is characterized by a group of symptoms that occur together, including repeated abdominal pain and changes in bowel movements (diarrhea, constipation, or both). Unlike inflammatory bowel disease (IBD), IBS does not cause visible signs of damage or inflammation in the digestive tract. It's considered a disorder of gut-brain interaction, where issues with communication between the brain and the gut lead to increased gut sensitivity and changes in how the bowel muscles contract.",
+    "types": [
+      "IBS with Constipation (IBS-C): Characterized by abdominal pain and predominantly hard or lumpy stools.",
+      "IBS with Diarrhea (IBS-D): Characterized by abdominal pain and predominantly loose or watery stools.",
+      "IBS with Mixed Bowel Habits (IBS-M): Characterized by abdominal pain and both hard/lumpy and loose/watery stools.",
+      "IBS Unsubtyped (IBS-U): Characterized by abdominal pain and abnormal bowel movements that do not fit the criteria for IBS-C, IBS-D, or IBS-M."
+    ],
+    "causes": [
+      "Altered muscle contractions in the intestines (motility issues).",
+      "Nervous system abnormalities affecting gut-brain communication.",
+      "Severe infection (post-infectious IBS).",
+      "Changes in gut microbes (dysbiosis).",
+      "Early-life stress or trauma.",
+      "Food sensitivities or intolerances (though not typically true allergies).",
+      "Stress and psychological factors (can trigger or worsen symptoms, though not a direct cause)."
+    ],
+    "symptoms": [
+      "Abdominal pain, cramping, or bloating, often relieved by passing a bowel movement.",
+      "Changes in the frequency of bowel movements.",
+      "Changes in the appearance or consistency of stool.",
+      "Diarrhea (loose, watery stools).",
+      "Constipation (hard, lumpy stools).",
+      "Alternating between constipation and diarrhea.",
+      "Excessive gas.",
+      "Mucus in the stool.",
+      "Feeling of incomplete bowel evacuation.",
+      "Urgency to have a bowel movement.",
+      "Symptoms may worsen after eating."
+    ],
+    "diagnosis": [
+      "Based on symptom patterns (e.g., Rome IV criteria).",
+      "Physical examination.",
+      "Review of medical history.",
+      "Exclusion of other conditions with similar symptoms (e.g., Celiac disease, IBD, infections) through tests like blood tests, stool tests, colonoscopy, or imaging."
+    ],
+    "treatments": [
+      "Dietary changes (e.g., low FODMAP diet, increasing soluble fiber, avoiding trigger foods like certain dairy, wheat, beans, cabbage, carbonated drinks).",
+      "Lifestyle modifications (e.g., stress management techniques like meditation, yoga, regular exercise, adequate sleep).",
+      "Medications to manage specific symptoms (e.g., antispasmodics for pain, laxatives for constipation, antidiarrheals for diarrhea, low-dose antidepressants).",
+      "Probiotics and prebiotics.",
+      "Psychological therapies (e.g., Cognitive Behavioral Therapy (CBT), gut-directed hypnotherapy)."
+    ],
+    "meal_plans": [
+      "Focus on regular meal times and not skipping meals.",
+      "Eating smaller, more frequent meals can be helpful for some.",
+      "Low FODMAP diet: Restrict certain carbohydrates that are poorly absorbed and fermented by gut bacteria.",
+      "Increase soluble fiber (oats, psyllium, certain fruits and vegetables) for both constipation and diarrhea.",
+      "Limit insoluble fiber (found in whole grains, nuts, seeds, fruit skins) during flare-ups if it worsens symptoms.",
+      "Stay hydrated, primarily with water.",
+      "Avoid known personal trigger foods (often identified through a food diary or elimination diet).",
+      "Examples of potentially well-tolerated foods: Rice, quinoa, lean proteins (chicken, fish), certain vegetables (carrots, zucchini, spinach), certain fruits (berries, bananas, citrus), lactose-free dairy or alternatives.",
+      "Examples of foods to limit/avoid (common triggers): High-FODMAP foods (onion, garlic, wheat, certain fruits/veg, artificial sweeteners), fatty foods, spicy foods, caffeine, alcohol, carbonated drinks."
+    ],
+     "lifestyle_tips": [
+        "Identify and manage stress through relaxation techniques, mindfulness, or therapy.",
+        "Engage in regular, moderate exercise to help regulate bowel function and reduce stress.",
+        "Ensure adequate and consistent sleep.",
+        "Keep a food and symptom diary to identify personal triggers.",
+        "Avoid eating large meals quickly.",
+        "Seek support from healthcare professionals, including dietitians and mental health specialists, as needed.",
+        "Consider peppermint oil or other natural remedies under guidance from a healthcare provider."
+    ],
+    "additional_notes": [
+      "IBS is a chronic condition that requires long-term management.",
+      "Symptoms can vary greatly from person to person and may change over time.",
+      "It does not increase the risk of more serious conditions like colon cancer or inflammatory bowel disease (IBD).",
+      "Diagnosis is typically made based on symptoms after ruling out other conditions."
+    ]
+  }
+]
