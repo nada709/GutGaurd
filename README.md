@@ -71,11 +71,10 @@ Access at: `http://localhost:8001/frontend.html`
 
 ## Dataset Details
 Our comprehensive medical dataset includes:
-- **20+ Conditions**: IBS, Crohn's, Ulcerative Colitis, etc.
-- **Symptoms**: Detailed descriptions
-- **Treatments**: Medical and lifestyle options
+- **Symptom tracking**: Detailed descriptions
+- **diseases misdiagnoseda as ibs**: to enhanceblood test and colonscopy analysis
 - **Dietary Guidance**: Foods to eat/avoid
-- **Medications**: Common prescriptions
+
 
 **Sources**:
 - Harrison's Principles of Internal Medicine
@@ -113,9 +112,5 @@ We welcome contributions through:
 2. Create feature branch
 3. Submit pull request
 
-## Contact
-For academic or collaboration inquiries:
-Email: khalefa.nada7@gmail.com
-Department of Computer Science  
-Effat University  
+
 
